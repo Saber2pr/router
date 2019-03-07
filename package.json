@@ -1,6 +1,6 @@
 {
   "name": "saber-router",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "router for SPA.",
   "repository": {
     "type": "git",
