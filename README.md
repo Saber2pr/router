@@ -13,28 +13,13 @@ git clone https://github.com/Saber2pr/saber-router.git
 # For Example
 
 ```ts
-Router([
-  {
-    path: '/',
-    callback: () => alert('root')
-  },
-  {
-    path: 'home',
-    callback: () => alert('home')
-  },
-  {
-    path: 'home/test',
-    callback: () => alert('home/test')
-  },
-  {
-    path: 'project',
-    callback: () => alert('project')
-  },
-  {
-    path: 'about',
-    callback: () => alert('about')
-  }
-])
+Router({
+  '/': () => alert('/'),
+  '/home': () => alert('/home'),
+  '/home/test': () => alert('/home/test'),
+  '/project': () => alert('/project'),
+  '/about': '/home'
+})
 ```
 
 ---
