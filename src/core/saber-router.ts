@@ -2,7 +2,7 @@
  * @Author: saber2pr
  * @Date: 2019-03-07 16:28:01
  * @Last Modified by: saber2pr
- * @Last Modified time: 2019-04-02 17:56:11
+ * @Last Modified time: 2019-04-02 18:11:57
  */
 export interface Routes {
   [url: string]: string | ((url: string) => void)
