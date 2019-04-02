@@ -15,12 +15,15 @@ export interface AnchorProps
 
 export const Anchor = (props: AnchorProps) => {
   const origin_onClick = props.onClick
-  if (origin_onClick) {
-    props.onClick = event => {
-      event.preventDefault()
-      origin_onClick(event)
-      push(props.href)
-    }
+
+  const onClick_alter = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    event.preventDefault()
+    push(props.href)
+
+    origin_onClick && origin_onClick(event)
   }
-  return <a {...props} />
+
+  return <a {...props} onClick={onClick_alter} />
 }

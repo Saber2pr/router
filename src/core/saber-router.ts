@@ -30,7 +30,10 @@ const gotoRoute = (routes: Routes, start: string): void => {
 
 let __routes: Routes
 
-export const Router = (routes: Routes) => (__routes = routes)
+export const Router = (routes: Routes, start: string = '/') => {
+  __routes = routes
+  __routes[start] && push(start)
+}
 
 export const push = (url: string) => {
   window.history.pushState(null, null, url)
