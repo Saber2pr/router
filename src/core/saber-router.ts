@@ -1,8 +1,8 @@
 /*
  * @Author: saber2pr
  * @Date: 2019-03-07 16:28:01
- * @Last Modified by:   saber2pr
- * @Last Modified time: 2019-03-07 16:28:01
+ * @Last Modified by: saber2pr
+ * @Last Modified time: 2019-04-02 17:56:11
  */
 export interface Routes {
   [url: string]: string | ((url: string) => void)
@@ -28,7 +28,14 @@ const gotoRoute = (routes: Routes, start: string): void => {
   current(url || start)
 }
 
-export const Router = (routes: Routes) => {
-  gotoRoute(routes, '/')
-  window.onhashchange = event => gotoRoute(routes, event.newURL.split('#')[1])
+let __routes: Routes
+
+export const Router = (routes: Routes) => (__routes = routes)
+
+export const push = (url: string) => {
+  window.history.pushState(null, null, url)
+  if (!__routes) {
+    throw new Error('please register routes first!')
+  }
+  gotoRoute(__routes, url)
 }

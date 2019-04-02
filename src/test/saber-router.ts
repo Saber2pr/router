@@ -1,4 +1,4 @@
-import { Router } from '../core/saber-router'
+import { Router, push } from '../core/saber-router'
 
 export function test_saber_router() {
   Router({
@@ -9,3 +9,5 @@ export function test_saber_router() {
     '/about': '/home'
   })
 }
+
+;(<any>window).goto = url => push(url)
