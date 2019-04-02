@@ -1,6 +1,6 @@
 {
   "name": "saber-router",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "router for SPA.",
   "repository": {
     "type": "git",
@@ -19,12 +19,14 @@
   "scripts": {
     "test": "node ./lib/test/test.js",
     "start": "tsc --watch",
-    "dev": "rollup -c --watch"
+    "dev": "rollup -c --watch",
+    "serve": "node serve.js"
   },
   "devDependencies": {
     "rollup": "^1.1.2",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^4.0.0",
+    "saber-httpserver": "0.0.6",
     "typescript": "^3.2.1"
   },
   "dependencies": {

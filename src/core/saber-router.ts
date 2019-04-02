@@ -2,7 +2,7 @@
  * @Author: saber2pr
  * @Date: 2019-03-07 16:28:01
  * @Last Modified by: saber2pr
- * @Last Modified time: 2019-04-02 18:11:57
+ * @Last Modified time: 2019-04-02 21:20:08
  */
 export interface Routes {
   [url: string]: string | ((url: string) => void)
@@ -33,10 +33,11 @@ let __routes: Routes
 export const Router = (routes: Routes, start: string = '/') => {
   __routes = routes
   __routes[start] && push(start)
+  window.onpopstate = event => gotoRoute(__routes, event.state)
 }
 
 export const push = (url: string) => {
-  window.history.pushState(null, null, url)
+  window.history.pushState(url, null, url)
   if (!__routes) {
     throw new Error('please register routes first!')
   }
