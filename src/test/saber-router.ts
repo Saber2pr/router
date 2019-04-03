@@ -1,13 +1,12 @@
-import { Router, dispatch, getState } from '../core/saber-router'
+import { useRoute, dispatch } from '../core/router'
 
-export function test_saber_router() {
-  Router({
-    '/': () => alert(getState()),
-    '/home': () => alert(getState()),
-    '/home/test': () => alert(getState()),
-    '/project': () => alert(getState()),
-    '/about': '/home'
-  })
-}
+export function test_saber_router() {}
+
+useRoute('/', () => alert('/'), true)
+useRoute('/home', () => alert('/home'))
+useRoute('/home/test', () => alert('/home/test'))
+useRoute('/project', () => alert('/project'))
+useRoute('/about', () => alert('/about'))
+
 
 ;(<any>window).goto = url => dispatch(url)

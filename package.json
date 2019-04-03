@@ -1,6 +1,6 @@
 {
   "name": "saber-router",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "router for SPA.",
   "repository": {
     "type": "git",
@@ -15,7 +15,7 @@
   "keywords": [
     "router",
     "history",
-    "subscribe"
+    "observable"
   ],
   "main": "./lib/index.js",
   "scripts": {
@@ -32,7 +32,8 @@
     "typescript": "^3.2.1"
   },
   "dependencies": {
-    "@types/react": "^16.8.10"
+    "@types/react": "^16.8.10",
+    "saber-observable": "^1.1.8"
   },
   "peerDependencies": {
     "@types/react": "^16.8.10"
