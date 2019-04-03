@@ -13,13 +13,17 @@ git clone https://github.com/Saber2pr/saber-router.git
 # For Example
 
 ```ts
-Router({
+createRouter({
   '/': () => alert('/'),
   '/home': () => alert('/home'),
   '/home/test': () => alert('/home/test'),
   '/project': () => alert('/project'),
   '/about': '/home'
 })
+
+dispatch('/about')
+
+getState() // /about
 ```
 
 ---

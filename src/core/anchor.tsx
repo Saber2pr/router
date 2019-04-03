@@ -5,7 +5,7 @@
  * @Last Modified time: 2019-04-02 18:14:44
  */
 import React from 'react'
-import { push } from './saber-router'
+import { dispatch } from './saber-router'
 
 export interface AnchorProps
   extends React.DetailedHTMLProps<
@@ -20,7 +20,7 @@ export const Anchor = (props: AnchorProps) => {
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     event.preventDefault()
-    push(props.href)
+    dispatch(props.href)
 
     origin_onClick && origin_onClick(event)
   }

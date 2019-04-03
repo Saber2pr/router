@@ -5,7 +5,7 @@
  * @Last Modified time: 2019-04-02 21:20:08
  */
 export interface Routes {
-  [url: string]: string | ((url: string) => void)
+  [url: string]: string | (() => void)
 }
 
 const RouteException = (url: string) => {
@@ -25,21 +25,25 @@ const gotoRoute = (routes: Routes, start: string): void => {
       RouteException(current)
     }
   }
-  current(url || start)
+  __currentUrl = url || start
+  current()
 }
 
 let __routes: Routes
+let __currentUrl: string
 
-export const Router = (routes: Routes, start: string = '/') => {
+export const createRouter = (routes: Routes, start: string = '/') => {
   __routes = routes
-  __routes[start] && push(start)
+  __routes[start] && dispatch(start)
   window.onpopstate = event => gotoRoute(__routes, event.state)
 }
 
-export const push = (url: string) => {
+export const dispatch = (url: string) => {
   window.history.pushState(url, null, url)
   if (!__routes) {
     throw new Error('please register routes first!')
   }
   gotoRoute(__routes, url)
 }
+
+export const getState = () => __currentUrl

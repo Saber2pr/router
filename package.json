@@ -1,6 +1,6 @@
 {
   "name": "saber-router",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "router for SPA.",
   "repository": {
     "type": "git",
@@ -13,7 +13,9 @@
     "lib/index.*"
   ],
   "keywords": [
-    "router"
+    "router",
+    "history",
+    "subscribe"
   ],
   "main": "./lib/index.js",
   "scripts": {
