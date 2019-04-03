@@ -10,8 +10,13 @@ const historyObs = new Observable('')
 
 window.onpopstate = event => historyObs.dispatch(event.state)
 
+let __currentHref = ''
+
+export const getState = () => __currentHref
+
 export const dispatch = (url: string) => {
   window.history.pushState(url, null, url)
+  __currentHref = url
   historyObs.dispatch(url)
 }
 
