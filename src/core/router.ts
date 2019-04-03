@@ -5,7 +5,7 @@
  * @Last Modified time: 2019-04-03 16:49:54
  */
 import { Observable } from 'saber-observable'
-
+import { useEffect } from 'react'
 const historyObs = new Observable('')
 
 window.onpopstate = event => historyObs.dispatch(event.state)
@@ -19,17 +19,16 @@ export const useRoute = (
   url: string,
   todo: Function,
   matchRule?: ($url: string) => boolean
-) => {
-  const match = ($url: string) => {
-    if (typeof matchRule !== 'undefined') {
-      matchRule($url) && todo($url)
-    } else {
-      $url.includes(url) && todo($url)
+) =>
+  useEffect(() => {
+    const match = ($url: string) => {
+      if (typeof matchRule !== 'undefined') {
+        matchRule($url) && todo($url)
+      } else {
+        $url.includes(url) && todo($url)
+      }
     }
-  }
-  historyObs.subscribe(match)
+    historyObs.subscribe(match)
 
-  return () => {
-    historyObs.unsubscribe(match)
-  }
-}
+    return () => historyObs.unsubscribe(match)
+  })
