@@ -32,7 +32,7 @@ const gotoRoute = (routes: Routes, start: string): void => {
 let __routes: Routes
 let __currentUrl: string
 
-export const createRouter = (routes: Routes, start: string = '/') => {
+export const Router = (routes: Routes, start: string = '/') => {
   __routes = routes
   __routes[start] && dispatch(start)
   window.onpopstate = event => gotoRoute(__routes, event.state)
