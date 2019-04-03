@@ -1,8 +1,8 @@
 /*
  * @Author: saber2pr
  * @Date: 2019-04-03 15:50:57
- * @Last Modified by:   saber2pr
- * @Last Modified time: 2019-04-03 15:50:57
+ * @Last Modified by: saber2pr
+ * @Last Modified time: 2019-04-03 16:49:54
  */
 import { Observable } from 'saber-observable'
 
@@ -18,12 +18,16 @@ export const dispatch = (url: string) => {
 export const useRoute = (
   url: string,
   todo: Function,
-  isRoot: boolean = false
+  matchRule?: ($url: string) => boolean
 ) => {
-  const match = ($url: string) => $url.includes(url) && todo($url)
+  const match = ($url: string) => {
+    if (typeof matchRule !== 'undefined') {
+      matchRule($url) && todo($url)
+    } else {
+      $url.includes(url) && todo($url)
+    }
+  }
   historyObs.subscribe(match)
-
-  isRoot && historyObs.dispatch(url)
 
   return () => {
     historyObs.unsubscribe(match)
