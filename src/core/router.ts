@@ -20,7 +20,7 @@ export const useRoute = (
   todo: Function,
   isRoot: boolean = false
 ) => {
-  const match = $url => $url === url && todo()
+  const match = ($url: string) => $url.includes(url) && todo()
   historyObs.subscribe(match)
 
   isRoot && historyObs.dispatch(url)
