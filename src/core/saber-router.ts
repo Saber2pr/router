@@ -34,7 +34,7 @@ let __currentUrl: string
 
 export const Router = (routes: Routes, start: string = '/') => {
   __routes = routes
-  __routes[start] && dispatch(start)
+  start in __routes ? dispatch(start) : dispatch(Object.keys(__routes)[0])
   window.onpopstate = event => gotoRoute(__routes, event.state)
 }
 
