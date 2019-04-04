@@ -23,6 +23,19 @@ useRoutes({
 })
 
 useRoutes('/about', '/home')
+
+// cancel use the routes:
+useRoutes('/about', '/home')()
+
+// if use hooks, you should use useEffect to cleanup the subscribptions.
+useEffect(() =>
+    useRoutes({
+      '/': () => alert(getHref()),
+      '/home': () => alert(getHref()),
+      '/home/test': () => alert(getHref()),
+      '/project': () => alert(getHref())
+    })
+  )
 ```
 
 ```tsx
