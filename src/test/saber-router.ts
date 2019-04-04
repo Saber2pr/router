@@ -1,13 +1,14 @@
-import { Router, push } from '../core/saber-router'
+import { useRoutes, push, getHref } from '../core/saber-router'
 
 export function test_saber_router() {
-  Router({
-    '/': url => alert(url),
-    '/home': url => alert(url),
-    '/home/test': url => alert(url),
-    '/project': url => alert(url),
-    '/about': '/home'
+  useRoutes({
+    '/': () => alert(getHref()),
+    '/home': () => alert(getHref()),
+    '/home/test': () => alert(getHref()),
+    '/project': () => alert(getHref())
   })
+
+  useRoutes('/about', '/home')
 }
 
 ;(<any>window).goto = url => push(url)
