@@ -1,10 +1,13 @@
-import { useRoute, dispatch } from '../core/router'
+import { Router, push } from '../core/saber-router'
 
-export function test_saber_router() {}
+export function test_saber_router() {
+  Router({
+    '/': url => alert(url),
+    '/home': url => alert(url),
+    '/home/test': url => alert(url),
+    '/project': url => alert(url),
+    '/about': '/home'
+  })
+}
 
-useRoute('/', () => alert('/'))
-useRoute('/home', () => alert('/home'))
-useRoute('/home/test', () => alert('/home/test'))
-useRoute('/project', () => alert('/project'))
-useRoute('/about', () => alert('/about'))
-;(<any>window).goto = url => dispatch(url)
+;(<any>window).goto = url => push(url)

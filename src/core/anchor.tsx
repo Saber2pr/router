@@ -2,17 +2,11 @@
  * @Author: saber2pr
  * @Date: 2019-04-02 18:06:08
  * @Last Modified by: saber2pr
- * @Last Modified time: 2019-04-03 15:42:47
+ * @Last Modified time: 2019-04-02 18:14:44
  */
 import React from 'react'
-import { dispatch } from './router'
-/**
- * AnchorProps
- *
- * @export
- * @interface AnchorProps
- * @extends {React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>}
- */
+import { push } from './saber-router'
+
 export interface AnchorProps
   extends React.DetailedHTMLProps<
     React.AnchorHTMLAttributes<HTMLAnchorElement>,
@@ -26,7 +20,7 @@ export const Anchor = (props: AnchorProps) => {
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     event.preventDefault()
-    dispatch(props.href)
+    push(props.href)
 
     origin_onClick && origin_onClick(event)
   }
