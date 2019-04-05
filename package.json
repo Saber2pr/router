@@ -1,6 +1,6 @@
 {
   "name": "saber-router",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "router for SPA.",
   "repository": {
     "type": "git",
@@ -26,14 +26,12 @@
     "serve": "node serve.js"
   },
   "devDependencies": {
+    "@types/react": "^16.8.12",
     "rollup": "^1.1.2",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^4.0.0",
     "saber-httpserver": "0.0.6",
     "typescript": "^3.2.1"
-  },
-  "dependencies": {
-    "@types/react": "^16.8.10"
   },
   "peerDependencies": {
     "@types/react": "^16.8.10"
