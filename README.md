@@ -15,17 +15,15 @@ git clone https://github.com/Saber2pr/saber-router.git
 # For Example
 
 ```ts
-useRoutes({
+const unUseRoutes = useRoutes({
   '/': () => alert(getHref()),
   '/home': () => alert(getHref()),
   '/home/test': () => alert(getHref()),
   '/project': () => alert(getHref())
 })
 
-useRoutes('/about', '/home')
-
 // cancel use the routes:
-useRoutes('/about', '/home')()
+unUseRoutes()
 ```
 
 # For React
