@@ -1,9 +1,21 @@
 /*
  * @Author: saber2pr
- * @Date: 2019-03-07 16:28:01
+ * @Date: 2019-04-07 14:23:15
  * @Last Modified by: saber2pr
- * @Last Modified time: 2019-04-02 21:20:08
+ * @Last Modified time: 2019-04-07 14:45:21
  */
+import { subscribe, dispatch } from '@saber2pr/event'
+
+let __currentHref: string = ''
+/**
+ * get the current url.
+ *
+ * @export
+ * @returns
+ */
+export function getHref() {
+  return __currentHref
+}
 /**
  * Routes
  *
@@ -11,42 +23,7 @@
  * @interface Routes
  */
 export interface Routes {
-  [url: string]: string | (() => void)
-}
-
-const __routes: Routes = {}
-window.onpopstate = event => gotoRoute(__routes, event.state)
-let __currentHref: string = ''
-
-const RouteException = (url: string) => {
-  throw new Error(`can not find route:[${url}]`)
-}
-
-const gotoRoute = (routes: Routes, start: string): void => {
-  let current = routes[start]
-  if (typeof current === 'undefined') RouteException(start)
-  let url: string
-  while (typeof current === 'string') {
-    const next = routes[current]
-    if (next) {
-      url = current
-      current = next
-    } else {
-      RouteException(current)
-    }
-  }
-  __currentHref = url || start
-  current()
-}
-/**
- * push
- *
- * @export
- * @param {string} url
- */
-export function push(url: string) {
-  window.history.pushState(url, null, url)
-  url in __routes ? gotoRoute(__routes, url) : RouteException(url)
+  [url: string]: (data: any) => void
 }
 /**
  * UnUseRoutes
@@ -61,49 +38,61 @@ export interface UnUseRoutes {
  * useRoutes
  *
  * @export
- * @param {Routes} arg1 routes
- * @returns {UnUseRoutes}
- */
-export function useRoutes(arg1: Routes): UnUseRoutes
-/**
- * useRoutes
- *
- * @export
- * @param {string} arg1 route-name
- * @param {() => void} arg2 route-to
- * @returns {UnUseRoutes}
- */
-export function useRoutes(arg1: string, arg2: string): UnUseRoutes
-/**
- * useRoutes
- *
- * @export
- * @param {string} arg1 route-name
- * @param {() => void} arg2 route-callback
- * @returns {UnUseRoutes}
- */
-export function useRoutes(arg1: string, arg2: () => void): UnUseRoutes
-export function useRoutes(
-  arg1: Routes | string,
-  arg2?: string | (() => void)
-): UnUseRoutes {
-  if (typeof arg1 === 'string') {
-    arg1 in __routes || (__routes[arg1] = arg2)
-    return () => arg1 in __routes && delete __routes[arg1]
-  } else {
-    Object.keys(arg1).forEach(
-      key => key in __routes || (__routes[key] = arg1[key])
-    )
-    return () =>
-      Object.keys(arg1).forEach(key => key in __routes && delete __routes[key])
-  }
-}
-/**
- * getHref
- *
- * @export
+ * @param {Routes} routes
  * @returns
  */
-export function getHref() {
-  return __currentHref
+export function useRoutes(routes: Routes): UnUseRoutes {
+  const unsubscribes = Object.keys(routes).map(url =>
+    useRoute(url, routes[url])
+  )
+  return () => unsubscribes.forEach(u => u())
+}
+/**
+ * UnUseRoute
+ *
+ * @export
+ * @interface UnUseRoute
+ */
+export interface UnUseRoute {
+  (): void
+}
+/**
+ * useRoute
+ *
+ * @export
+ * @template T
+ * @param {string} url
+ * @param {(data?: T) => void} todo
+ * @returns
+ */
+export function useRoute<T>(url: string, todo: (data?: T) => void): UnUseRoute {
+  return subscribe(url, todo)
+}
+/**
+ * push
+ *
+ * @export
+ * @template T
+ * @param {string} url
+ * @param {T} [data]
+ */
+export function push<T>(url: string): void
+export function push<T>(url: string, data: T): void
+export function push<T>(url: string, data?: T): void {
+  window.history && window.history.pushState(url, null, url)
+  gotoUrl(url, data)
+}
+
+window.onpopstate = event => gotoUrl(event.state, event.state)
+
+const gotoUrl = (url: string, data: any) => {
+  try {
+    try {
+      dispatch((__currentHref = url), data)
+    } catch (error) {
+      throw new Error(`can not find route:[${url}]`)
+    }
+  } catch (error) {
+    console.log(error)
+  }
 }

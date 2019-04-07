@@ -5,10 +5,10 @@ export function test_saber_router() {
     '/': () => alert(getHref()),
     '/home': () => alert(getHref()),
     '/home/test': () => alert(getHref()),
-    '/project': () => alert(getHref())
+    '/project': () => alert(getHref()),
+    '/about': () => alert(getHref())
   })
-
-  useRoutes('/about', '/home')
+  push('/home')
 }
 
 ;(<any>window).goto = url => push(url)
