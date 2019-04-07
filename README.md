@@ -12,18 +12,63 @@ npm install saber-router
 git clone https://github.com/Saber2pr/saber-router.git
 ```
 
-# For Example
+# API
 
-```ts
+## useRoute
+
+监听一个 url
+
+参数：useRoute(url, callback)
+
+返回值：Function，执行后取消对该 url 的监听
+
+```js
+// 监听url: '/home'
+const unUseRoute = useRoute('/home', () => alert('home'))
+// 取消对'/home'的监听
+unUseRoute()
+```
+
+## useRoutes
+
+监听一组 url
+
+参数：useRoutes(obj)，obj 属性是 url，值是 callback
+
+返回值：Function，执行后取消对该组 url 的监听
+
+```js
 const unUseRoutes = useRoutes({
   '/': () => alert(getHref()),
   '/home': () => alert(getHref()),
   '/home/test': () => alert(getHref()),
-  '/project': () => alert(getHref())
+  '/project': () => alert(getHref()),
+  '/about': () => alert(getHref())
 })
-
-// cancel use the routes:
+// 取消监听
 unUseRoutes()
+```
+
+## push
+
+发射路由事件
+
+参数： push(url)或 push(url, data)，第二个参数可以在 callback 参数中获取
+
+```js
+push('/home')
+
+push('/home', 'hello')
+```
+
+## getHref
+
+获取当前 url
+
+```js
+push('/home')
+
+getHref() // '/home'
 ```
 
 # For React
@@ -34,45 +79,12 @@ unUseRoutes()
 // if use hooks, you should use useEffect to cleanup the subscribptions.
 useEffect(() =>
   useRoutes({
-    '/': () => alert(getHref()),
-    '/home': () => alert(getHref()),
-    '/home/test': () => alert(getHref()),
-    '/project': () => alert(getHref())
+    '/': () => {},
+    '/home': () => {},
+    '/home/test': () => {},
+    '/project': () => {}
   })
 )
-
-// from array reduce
-
-type route = '/about' | '/blog' | '/' | '/links'
-
-const routes: route[] = ['/', '/blog', '/about', '/links']
-
-const Main = () => {
-  const [state, setState] = useState<route>('/')
-  useEffect(() =>
-    useRoutes(
-      routes.reduce(
-        (out, cur) => ({
-          ...out,
-          [cur]: () => setState(cur)
-        }),
-        {}
-      )
-    )
-  )
-  switch (state) {
-    case '/about':
-      return <About />
-    case '/blog':
-      return <Blog />
-    case '/':
-      return <Home />
-    case '/links':
-      return <Link />
-    default:
-      return <h1>404</h1>
-  }
-}
 ```
 
 ---

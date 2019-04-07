@@ -81,9 +81,8 @@ export function push<T>(url: string, data: T): void
 export function push<T>(url: string, data?: T): void {
   window.history && window.history.pushState(url, null, url)
   gotoUrl(url, data)
+  window.scroll(0, 0)
 }
-
-window.onpopstate = event => gotoUrl(event.state, event.state)
 
 const gotoUrl = (url: string, data: any) => {
   try {
@@ -96,3 +95,5 @@ const gotoUrl = (url: string, data: any) => {
     console.log(error)
   }
 }
+
+window.onpopstate = event => gotoUrl(event.state, event.state)
