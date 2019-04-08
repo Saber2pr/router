@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/saber-router.svg?color=blue)](https://www.npmjs.com/package/saber-router)
 
-> router for SPA.
+> router.
 
 ```bash
 # from npm
@@ -74,7 +74,7 @@ getHref() // '/home'
 # For React
 
 ```tsx
-<Anchor href="/home">home</Anchor>
+;<Anchor href="/home">home</Anchor>
 
 // if use hooks, you should use useEffect to cleanup the subscribptions.
 useEffect(() =>

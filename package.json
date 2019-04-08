@@ -1,6 +1,6 @@
 {
   "name": "saber-router",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "router for SPA.",
   "repository": {
     "type": "git",
@@ -37,6 +37,6 @@
     "@types/react": "^16.8.10"
   },
   "dependencies": {
-    "@saber2pr/event": "0.0.3"
+    "@saber2pr/event": "0.0.7"
   }
 }

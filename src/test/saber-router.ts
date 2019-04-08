@@ -1,5 +1,9 @@
 import { useRoutes, push, getHref } from '../core/saber-router'
 
+function alert(str) {
+  console.log(str)
+}
+
 export function test_saber_router() {
   useRoutes({
     '/': () => alert(getHref()),

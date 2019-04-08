@@ -2,9 +2,12 @@
  * @Author: saber2pr
  * @Date: 2019-04-07 14:23:15
  * @Last Modified by: saber2pr
- * @Last Modified time: 2019-04-07 14:45:21
+ * @Last Modified time: 2019-04-08 13:39:41
  */
 import { subscribe, dispatch } from '@saber2pr/event'
+import { Exception } from './utils/error'
+import { Browser } from './browser'
+import { isBrowser } from './utils/validators'
 
 let __currentHref: string = ''
 /**
@@ -79,21 +82,23 @@ export function useRoute<T>(url: string, todo: (data?: T) => void): UnUseRoute {
 export function push<T>(url: string): void
 export function push<T>(url: string, data: T): void
 export function push<T>(url: string, data?: T): void {
-  window.history && window.history.pushState(url, null, url)
+  if (isBrowser()) {
+    try {
+      Browser.pushState(url, null, url)
+      Browser.scroll(0, 0)
+    } catch (error) {
+      Exception(error, `cannot pushState:${url}`)
+    }
+  }
   gotoUrl(url, data)
-  window.scroll(0, 0)
 }
 
 const gotoUrl = (url: string, data: any) => {
   try {
-    try {
-      dispatch((__currentHref = url), data)
-    } catch (error) {
-      throw new Error(`can not find route:[${url}]`)
-    }
+    dispatch((__currentHref = url), data)
   } catch (error) {
-    console.log(error)
+    Exception(error, `can not find route:[${url}]`)
   }
 }
 
-window.onpopstate = event => gotoUrl(event.state, event.state)
+isBrowser() && Browser.onpopstate(event => gotoUrl(event.state, event.state))
