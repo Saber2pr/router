@@ -2,12 +2,10 @@
  * @Author: saber2pr
  * @Date: 2019-04-07 14:23:15
  * @Last Modified by: saber2pr
- * @Last Modified time: 2019-04-08 13:39:41
+ * @Last Modified time: 2019-04-08 18:06:46
  */
 import { subscribe, dispatch, createAction } from '@saber2pr/event'
 import { Exception } from './utils/error'
-import { Browser } from './browser'
-import { isBrowser } from './utils/validators'
 
 let __currentHref: string = ''
 /**
@@ -98,14 +96,8 @@ export function push<Action extends createAction>(
   url: Action['name'],
   data?: Action['data']
 ): void {
-  if (isBrowser()) {
-    try {
-      Browser.pushState(url, null, url)
-      Browser.scroll(0, 0)
-    } catch (error) {
-      Exception(error, `cannot pushState:${url}`)
-    }
-  }
+  window.history && window.history.pushState(url, null, url)
+  window.scroll(0, 0)
   gotoUrl(url, data)
 }
 
@@ -114,10 +106,10 @@ const gotoUrl = <Action extends createAction>(
   data: Action['data']
 ) => {
   try {
-    dispatch((__currentHref = url), data)
+    dispatch((__currentHref = url || __currentHref), data)
   } catch (error) {
     Exception(error, `can not find route:[${url}]`)
   }
 }
 
-isBrowser() && Browser.onpopstate(event => gotoUrl(event.state, event.state))
+window.onpopstate = event => gotoUrl(event.state, event.state)
