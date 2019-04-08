@@ -4,7 +4,7 @@
  * @Last Modified by: saber2pr
  * @Last Modified time: 2019-04-08 13:39:41
  */
-import { subscribe, dispatch } from '@saber2pr/event'
+import { subscribe, dispatch, createAction } from '@saber2pr/event'
 import { Exception } from './utils/error'
 import { Browser } from './browser'
 import { isBrowser } from './utils/validators'
@@ -26,7 +26,7 @@ export function getHref() {
  * @interface Routes
  */
 export interface Routes {
-  [url: string]: (data: any) => void
+  [url: string]: <Action extends createAction>(data: Action['data']) => void
 }
 /**
  * UnUseRoutes
@@ -63,25 +63,41 @@ export interface UnUseRoute {
  * useRoute
  *
  * @export
- * @template T
+ * @template Action
  * @param {string} url
- * @param {(data?: T) => void} todo
+ * @param {(data?: Action) => void} todo
  * @returns
  */
-export function useRoute<T>(url: string, todo: (data?: T) => void): UnUseRoute {
+export function useRoute<Action extends createAction>(
+  url: Action['name'],
+  todo: (data?: Action['data']) => void
+): UnUseRoute {
   return subscribe(url, todo)
 }
 /**
  * push
  *
  * @export
- * @template T
- * @param {string} url
- * @param {T} [data]
+ * @template Action
+ * @param {Action['name']} url
  */
-export function push<T>(url: string): void
-export function push<T>(url: string, data: T): void
-export function push<T>(url: string, data?: T): void {
+export function push<Action extends createAction>(url: Action['name']): void
+/**
+ * push
+ *
+ * @export
+ * @template Action
+ * @param {Action['name']} url
+ * @param {Action['data']} data
+ */
+export function push<Action extends createAction>(
+  url: Action['name'],
+  data: Action['data']
+): void
+export function push<Action extends createAction>(
+  url: Action['name'],
+  data?: Action['data']
+): void {
   if (isBrowser()) {
     try {
       Browser.pushState(url, null, url)
@@ -93,7 +109,10 @@ export function push<T>(url: string, data?: T): void {
   gotoUrl(url, data)
 }
 
-const gotoUrl = (url: string, data: any) => {
+const gotoUrl = <Action extends createAction>(
+  url: Action['name'],
+  data: Action['data']
+) => {
   try {
     dispatch((__currentHref = url), data)
   } catch (error) {
