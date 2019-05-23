@@ -2,7 +2,7 @@
  * @Author: saber2pr
  * @Date: 2019-05-23 13:49:17
  * @Last Modified by: saber2pr
- * @Last Modified time: 2019-05-23 14:03:55
+ * @Last Modified time: 2019-05-23 16:50:48
  */
 import { execute } from './execute'
 import { Routes } from './types'
@@ -23,7 +23,7 @@ export function getHref() {
   return __currentUrl
 }
 
-export function setRoute(url: string, callback: string | VoidFunction) {
+export function setRoute(url: string, callback: string | Function) {
   url in __routes || (__routes[url] = callback)
 }
 

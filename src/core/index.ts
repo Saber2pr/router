@@ -1,4 +1,5 @@
 export * from './anchor'
 export * from './types'
-export * from './useRoutes'
+export * from './router'
 export * from './var'
+export * from './config'
