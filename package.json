@@ -14,7 +14,7 @@
   ],
   "keywords": [
     "router",
-    "useRoutes",
+    "typescript",
     "react"
   ],
   "main": "./lib/index.js",
