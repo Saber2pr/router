@@ -1,15 +1,13 @@
-# saber-router
-
-[![npm](https://img.shields.io/npm/v/saber-router.svg?color=blue)](https://www.npmjs.com/package/saber-router)
+# @saber2pr/router
 
 > router.
 
 ```bash
 # from npm
-npm install saber-router
+npm install @saber2pr/router
 
 # from github
-git clone https://github.com/Saber2pr/saber-router.git
+git clone https://github.com/Saber2pr/@saber2pr/router.git
 ```
 
 # API
@@ -98,9 +96,6 @@ npm install
 ```bash
 npm start
 
-npm run dev
-
-npm run serve
 ```
 
 > Author: saber2pr

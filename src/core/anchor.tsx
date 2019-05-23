@@ -2,38 +2,20 @@
  * @Author: saber2pr
  * @Date: 2019-04-02 18:06:08
  * @Last Modified by: saber2pr
- * @Last Modified time: 2019-04-08 17:17:55
+ * @Last Modified time: 2019-05-23 13:55:00
  */
 import React from 'react'
-import { push } from './saber-router'
-import { createAction } from '@saber2pr/event'
-/**
- * AnchorProps
- *
- * @export
- * @interface AnchorProps
- * @extends {React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>}
- * @template Action
- */
-export interface AnchorProps<Action extends createAction>
+import { push } from './var';
+
+export interface AnchorProps
   extends React.DetailedHTMLProps<
     React.AnchorHTMLAttributes<HTMLAnchorElement>,
     HTMLAnchorElement
   > {
-  href?: Action['name']
-  data?: Action['data']
+  scrollReset?: boolean
 }
-/**
- * Anchor
- *
- * @export
- * @template Action
- * @param {AnchorProps<Action>} props
- * @returns
- */
-export function Anchor<Action extends createAction>(
-  props: AnchorProps<Action>
-) {
+
+export function Anchor(props: AnchorProps) {
   const origin_onClick = props.onClick
 
   const onClick_alter = (
@@ -42,7 +24,7 @@ export function Anchor<Action extends createAction>(
     event.preventDefault()
 
     const url = props.href
-    url && push(url, props.data)
+    url && push(url, props.scrollReset)
 
     origin_onClick && origin_onClick(event)
   }
