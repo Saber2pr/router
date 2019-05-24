@@ -26,8 +26,8 @@ export function execute(routes: Routes, start: string) {
     }
   }
 
-  if (Config.ReactDOM) {
-    Config.ReactDOM.render(current(), Config.container)
+  if (Config.render) {
+    Config.render(current(), Config.container)
   } else {
     current()
   }
