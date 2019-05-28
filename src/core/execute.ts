@@ -5,7 +5,7 @@
  * @Last Modified time: 2019-05-23 16:56:13
  */
 import { Routes } from './types'
-import { Config } from './config'
+import { config } from './config'
 
 export function execute(routes: Routes, start: string) {
   let current = routes[start]
@@ -26,8 +26,8 @@ export function execute(routes: Routes, start: string) {
     }
   }
 
-  if (Config.render) {
-    Config.render(current(), Config.container)
+  if (config.render) {
+    config.render(current(), config.container)
   } else {
     current()
   }

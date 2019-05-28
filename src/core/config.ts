@@ -8,7 +8,7 @@ export interface Render {
   (value: any, container: HTMLElement, ...args: any[]): any
 }
 
-export namespace Config {
+export namespace config {
   export let render: Render = null
   export let container: HTMLElement = document.getElementById('root')
   export let defaultRoute: string = '/'
