@@ -5,7 +5,7 @@
  * @Last Modified time: 2019-05-23 13:55:00
  */
 import React from 'react'
-import { push } from '.'
+import { push } from './router'
 
 export interface AnchorProps
   extends React.DetailedHTMLProps<
