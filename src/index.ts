@@ -1,1 +1,1 @@
-export { Router as default, Anchor } from './core'
+export { Router as default, Anchor, push, getHref } from './core'
