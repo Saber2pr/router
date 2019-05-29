@@ -12,7 +12,7 @@ git clone https://github.com/Saber2pr/@saber2pr/router.git
 
 # API
 
-> in typescript ...
+## Router
 
 ```ts
 // config Router
@@ -37,6 +37,20 @@ Router({
 const cancel = Router('/usersFrom', () => <UsersFrom />)
 
 cancel() // cancel route /usersFrom
+```
+
+## push
+
+```ts
+push('/login')
+
+push('/login', false) // scroll not reset
+```
+
+## tsx
+
+```ts
+<Anchor href="/login">login</Anchor>
 ```
 
 ---
