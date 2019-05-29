@@ -21,8 +21,7 @@ Router.render = ReactDOM.render
 
 // routes map
 Router({
-  // redirect
-  '/': '/profile',
+  '/': '/profile', // redirect
   '/profile': () => <Profile />,
   '/repo': () => <Repo />,
   '/news': () => <News />,
