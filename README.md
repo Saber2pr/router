@@ -14,6 +14,32 @@ git clone https://github.com/Saber2pr/@saber2pr/router.git
 
 > in typescript ...
 
+```ts
+// config Router
+Router.container = document.getElementById('#root')
+Router.render = ReactDOM.render
+
+// routes map
+Router({
+  // redirect
+  '/': '/profile',
+  '/profile': () => <Profile />,
+  '/repo': () => <Repo />,
+  '/news': () => <News />,
+  '/find': () => <Find />,
+  '/menu': () => <Menu />,
+  '/followers': () => <Followers />,
+  '/following': () => <Following />,
+  '/login': () => <Login />,
+  '/error': () => <Error />,
+  '/usersFrom': () => <UsersFrom />
+})
+
+const cancel = Router('/usersFrom', () => <UsersFrom />)
+
+cancel() // cancel route /usersFrom
+```
+
 ---
 
 ## start
