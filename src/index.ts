@@ -1,1 +1,4 @@
-export { Router as default, Anchor, push, getHref } from './core'
+import H from './core'
+export default H
+
+export * from './react'

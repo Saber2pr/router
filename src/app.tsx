@@ -1,28 +1,25 @@
-# @saber2pr/router
-
-> react-router-dom.
-
-> 支持 Router 嵌套.
-
-> 重定向还在测试
-
-```bash
-# from npm
-npm install @saber2pr/router
-
-# from github
-git clone https://github.com/Saber2pr/@saber2pr/router.git
-```
-
----
-
-# Feature
-
-```tsx
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Route, Router, Link, Redirect } from '.'
 
-import { Route, Router, Link, Redirect } from '@saber2pr/router'
+const Blog = () => (
+  <Router>
+    <nav>
+      <ul>
+        <li>
+          <Link to="/blog/first">first</Link>
+        </li>
+
+        <li>
+          <Link to="/blog/second">second</Link>
+        </li>
+      </ul>
+    </nav>
+
+    <Route default path="/blog/first" component={() => <div>first</div>} />
+    <Route path="/blog/second" component={() => <div>second</div>} />
+  </Router>
+)
 
 const App = (
   <Router>
@@ -47,45 +44,18 @@ const App = (
         </li>
       </ul>
     </nav>
+    <Redirect from="/home" to="/blog" />
 
     <Route path="/" component={() => <div>Hello World!</div>} />
 
     <Route path="/home" component={() => <div>home</div>} />
-    <Route path="/blog" component={() => <div>blog</div>} />
+    <Route path="/blog" component={() => <Blog />} />
     <Route path="/about" component={() => <div>about</div>} />
 
     <Route component={() => <h1>404 not Found</h1>} />
-
-    <Redirect from="/" to="/home" />
 
     <footer>footer</footer>
   </Router>
 )
 
 ReactDOM.render(App, document.querySelector('#root'))
-```
-
----
-
-# Dev
-
-> need server.
-
-## start
-
-```bash
-npm install
-```
-
-```bash
-npm start
-
-npm run dev
-
-npm run serve
-
-```
-
----
-
-> Author: saber2pr
