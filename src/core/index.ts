@@ -13,13 +13,14 @@ export interface Cancel {
 }
 
 // `/repo/react` matched `/repo` instead of `/`
-function getMaxLenChildStr(map: SubscribeMap, query: string) {
+function getMaxLenChildStr(map: SubscribeMap, query: string = '') {
   const maxLenStrs = Object.keys(map).sort((a, b) => b.length - a.length)
   return maxLenStrs.find(s => (s === '/' ? query === s : query.startsWith(s)))
 }
 
 function execute(map: SubscribeMap, start: string) {
   start = getMaxLenChildStr(map, start)
+
   let current = map[start]
 
   if (typeof current === 'undefined') {
@@ -65,7 +66,7 @@ namespace History {
   export function push(url: string, scrollReset: boolean = true) {
     HistoryStore.current = execute(HistoryStore.get(), url)
 
-    window.history.pushState(HistoryStore.current, null, HistoryStore.current)
+    window.history.pushState(url, null, url)
     scrollReset && window.scroll(0, 0)
   }
 

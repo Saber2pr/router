@@ -1,6 +1,6 @@
 # @saber2pr/router
 
-> react-router-dom.
+> react-router-dom by hooks api.
 
 > 支持 Router 嵌套.
 
@@ -46,7 +46,7 @@ const App = (
       </ul>
     </nav>
 
-    <Route path="/" component={() => <div>Hello World!</div>} />
+    <Route default path="/" component={() => <div>Hello World!</div>} />
 
     <Route path="/home" component={() => <div>home</div>} />
     <Route path="/blog" component={() => <div>blog</div>} />

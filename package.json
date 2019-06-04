@@ -1,7 +1,7 @@
 {
   "name": "@saber2pr/router",
-  "version": "0.0.8",
-  "description": "router.",
+  "version": "0.0.9",
+  "description": "> react-router-dom by hooks api.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Saber2pr/router.git"
@@ -10,6 +10,7 @@
   "license": "ISC",
   "files": [
     "lib/core/*",
+    "lib/react/*",
     "lib/index.*"
   ],
   "keywords": [

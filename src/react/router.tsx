@@ -17,8 +17,6 @@ export function Router({ children }: RouterProps) {
 
   const list = React.Children.toArray(children)
 
-  const defaultRoute = list.find(isDefaultRoute)
-
   useEffect(() => {
     const effects = list.reduce(
       (receiver, c, index) => {
@@ -45,8 +43,10 @@ export function Router({ children }: RouterProps) {
     effects.concat(History.subscribe('/404', () => render(<h1>404</h1>)))
 
     try {
-      // if not default tag, use `/`
-      const exec = defaultRoute ? defaultRoute.props.path : '/'
+      const defaultRoute = list.find(isDefaultRoute) || list.find(isRoute)
+      // if not default tag, use the first route.
+      const exec = defaultRoute.props.path
+
       History.push(exec)
     } catch (error) {
       History.push('/404')

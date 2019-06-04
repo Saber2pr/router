@@ -2,6 +2,29 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Route, Router, Link, Redirect } from '.'
 
+const Test = () => (
+  <Router>
+    <nav>
+      <ul>
+        <li>
+          <Link to="/blog/third/1">1</Link>
+        </li>
+
+        <li>
+          <Link to="/blog/third/2">2</Link>
+        </li>
+        <li>
+          <Link to="/blog/third/3">3</Link>
+        </li>
+      </ul>
+    </nav>
+
+    <Route path="/blog/third/1" component={() => <div>1</div>} />
+    <Route default path="/blog/third/2" component={() => <div>2</div>} />
+    <Route path="/blog/third/3" component={() => <div>3</div>} />
+  </Router>
+)
+
 const Blog = () => (
   <Router>
     <nav>
@@ -13,11 +36,25 @@ const Blog = () => (
         <li>
           <Link to="/blog/second">second</Link>
         </li>
+        <li>
+          <Link to="/blog/third">third</Link>
+        </li>
       </ul>
     </nav>
 
-    <Route default path="/blog/first" component={() => <div>first</div>} />
+    <Route path="/blog/first" component={() => <div>first</div>} />
     <Route path="/blog/second" component={() => <div>second</div>} />
+    <Route
+      path="/blog/third"
+      component={() => (
+        <div>
+          third
+          <div>
+            <Test />
+          </div>
+        </div>
+      )}
+    />
   </Router>
 )
 
