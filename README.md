@@ -1,5 +1,7 @@
 # @saber2pr/router
 
+[![npm](https://img.shields.io/npm/v/@saber2pr/router.svg?color=blue)](https://www.npmjs.com/package/@saber2pr/router)
+
 > react-router-dom by hooks api.
 
 > 支持 Router 嵌套.
