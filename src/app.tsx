@@ -44,13 +44,14 @@ const App = (
         </li>
       </ul>
     </nav>
-    <Redirect from="/home" to="/blog" />
 
     <Route path="/" component={() => <div>Hello World!</div>} />
 
     <Route path="/home" component={() => <div>home</div>} />
     <Route path="/blog" component={() => <Blog />} />
     <Route path="/about" component={() => <div>about</div>} />
+
+    <Redirect from="/home" to="/about" />
 
     <Route component={() => <h1>404 not Found</h1>} />
 

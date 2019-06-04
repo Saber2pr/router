@@ -4,8 +4,6 @@
 
 > 支持 Router 嵌套.
 
-> 重定向还在测试
-
 ```bash
 # from npm
 npm install @saber2pr/router

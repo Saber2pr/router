@@ -2,12 +2,11 @@
  * @Author: saber2pr
  * @Date: 2019-06-03 18:19:53
  * @Last Modified by: saber2pr
- * @Last Modified time: 2019-06-03 23:49:35
+ * @Last Modified time: 2019-06-03 23:56:40
  */
 import React, { useState, useEffect } from 'react'
 import { isRoute, isDefaultRoute } from './route'
 import History from '../core'
-import { RedirectMap } from './redirect'
 
 export interface RouterProps {
   children: JSX.Element | Array<JSX.Element>
@@ -30,14 +29,6 @@ export function Router({ children }: RouterProps) {
         if (!c.props.path) {
           return receiver.concat(
             History.subscribe('/404', () => render(<c.props.component />))
-          )
-        }
-
-        console.log(RedirectMap)
-        // is redirected
-        if (RedirectMap.has(c.props.path)) {
-          return receiver.concat(
-            History.subscribe(c.props.path, RedirectMap.get(c.props.path))
           )
         }
 

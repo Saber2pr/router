@@ -2,10 +2,11 @@
  * @Author: saber2pr
  * @Date: 2019-04-02 18:06:08
  * @Last Modified by: saber2pr
- * @Last Modified time: 2019-06-03 21:29:43
+ * @Last Modified time: 2019-06-03 23:59:23
  */
-import React from 'react'
+import React, { useContext } from 'react'
 import History from '../core'
+import { RedirectCtx } from './redirect'
 
 export interface LinkProps
   extends React.DetailedHTMLProps<
@@ -17,13 +18,18 @@ export interface LinkProps
 }
 
 export function Link({ to, scrollReset, onClick, ...props }: LinkProps) {
+  const RedirectMap = useContext(RedirectCtx)
   props.href = to
 
   const dispatch = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     event.preventDefault()
 
     try {
-      History.push(to, scrollReset)
+      if (RedirectMap.has(to)) {
+        History.push(RedirectMap.get(to), scrollReset)
+      } else {
+        History.push(to, scrollReset)
+      }
     } catch (error) {
       History.push('/404')
     }
