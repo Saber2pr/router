@@ -67,7 +67,7 @@ const Blog = () => (
 )
 
 const App = (
-  <Router history={hashHistory}>
+  <Router history={browserHistory}>
     <header>head</header>
 
     <nav>

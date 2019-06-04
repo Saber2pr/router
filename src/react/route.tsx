@@ -2,7 +2,7 @@
  * @Author: saber2pr
  * @Date: 2019-06-03 18:19:46
  * @Last Modified by: saber2pr
- * @Last Modified time: 2019-06-03 20:34:25
+ * @Last Modified time: 2019-06-04 16:52:11
  */
 import React from 'react'
 
@@ -10,6 +10,7 @@ export interface RouteProps {
   path?: string
   component: React.ComponentType<any>
   default?: boolean
+  cache?: 'root' | 'parent'
 }
 
 export interface RouteElement extends JSX.Element {

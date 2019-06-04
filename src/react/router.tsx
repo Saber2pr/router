@@ -2,12 +2,13 @@
  * @Author: saber2pr
  * @Date: 2019-06-03 18:19:53
  * @Last Modified by: saber2pr
- * @Last Modified time: 2019-06-04 15:15:11
+ * @Last Modified time: 2019-06-04 16:59:30
  */
 import React, { useState, useEffect } from 'react'
 import { isRoute, isDefaultRoute } from './route'
 import { History } from '../core'
 import { useHistory } from './history'
+import { createRouteFrame } from './createRouteFrame'
 
 export interface RouterProps {
   children: JSX.Element | Array<JSX.Element>
@@ -35,7 +36,7 @@ export function Router({ children, history }: RouterProps) {
         }
 
         // create route's frame
-        const rFrame = list.filter((c, i) => (isRoute(c) ? i === index : true))
+        const rFrame = createRouteFrame(list, index)
         const effect = H.subscribe(c.props.path, () => render(rFrame))
 
         return receiver.concat(effect)
