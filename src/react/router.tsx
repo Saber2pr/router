@@ -2,18 +2,22 @@
  * @Author: saber2pr
  * @Date: 2019-06-03 18:19:53
  * @Last Modified by: saber2pr
- * @Last Modified time: 2019-06-03 23:56:40
+ * @Last Modified time: 2019-06-04 15:15:11
  */
 import React, { useState, useEffect } from 'react'
 import { isRoute, isDefaultRoute } from './route'
-import History from '../core'
+import { History } from '../core'
+import { useHistory } from './history'
 
 export interface RouterProps {
   children: JSX.Element | Array<JSX.Element>
+  history?: History
 }
 
-export function Router({ children }: RouterProps) {
+export function Router({ children, history }: RouterProps) {
   const [frame, render] = useState<JSX.Element | JSX.Element[]>()
+
+  const H = useHistory(history)
 
   const list = React.Children.toArray(children)
 
@@ -26,13 +30,13 @@ export function Router({ children }: RouterProps) {
         // is none matched
         if (!c.props.path) {
           return receiver.concat(
-            History.subscribe('/404', () => render(<c.props.component />))
+            H.subscribe('/404', () => render(<c.props.component />))
           )
         }
 
         // create route's frame
         const rFrame = list.filter((c, i) => (isRoute(c) ? i === index : true))
-        const effect = History.subscribe(c.props.path, () => render(rFrame))
+        const effect = H.subscribe(c.props.path, () => render(rFrame))
 
         return receiver.concat(effect)
       },
@@ -40,16 +44,16 @@ export function Router({ children }: RouterProps) {
     )
 
     // default 404
-    effects.concat(History.subscribe('/404', () => render(<h1>404</h1>)))
+    effects.concat(H.subscribe('/404', () => render(<h1>404</h1>)))
 
     try {
       const defaultRoute = list.find(isDefaultRoute) || list.find(isRoute)
       // if not default tag, use the first route.
       const exec = defaultRoute.props.path
 
-      History.push(exec)
+      H.push(exec)
     } catch (error) {
-      History.push('/404')
+      H.push('/404')
     }
 
     return () => effects.forEach(c => c())

@@ -1,6 +1,6 @@
 {
   "name": "@saber2pr/router",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "> react-router-dom by hooks api.",
   "repository": {
     "type": "git",
@@ -16,7 +16,9 @@
   "keywords": [
     "router",
     "typescript",
-    "react"
+    "react",
+    "hash-router",
+    "history-router"
   ],
   "main": "./lib/index.js",
   "scripts": {

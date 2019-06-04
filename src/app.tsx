@@ -1,6 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Route, Router, Link, Redirect } from '.'
+import {
+  Route,
+  Router,
+  Link,
+  Redirect,
+  hashHistory,
+  browserHistory,
+  useHistory
+} from '.'
 
 const Test = () => (
   <Router>
@@ -59,7 +67,7 @@ const Blog = () => (
 )
 
 const App = (
-  <Router>
+  <Router history={hashHistory}>
     <header>head</header>
 
     <nav>

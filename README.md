@@ -6,6 +6,8 @@
 
 > 支持 Router 嵌套.
 
+> 支持 browserHistory、hashHistory
+
 ```bash
 # from npm
 npm install @saber2pr/router
@@ -23,9 +25,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import { Route, Router, Link, Redirect } from '@saber2pr/router'
+import { browserHistory, hashHistory } from '@saber2pr/router'
 
 const App = (
-  <Router>
+  <Router history={browserHistory}>
     <header>head</header>
 
     <nav>
@@ -63,6 +66,19 @@ const App = (
 )
 
 ReactDOM.render(App, document.querySelector('#root'))
+```
+
+## useHistory
+
+```ts
+import { useHistory } from '@saber2pr/router'
+
+// get current history strategy
+const History = useHistory()
+
+History.push
+History.getHref
+// ...
 ```
 
 ---
