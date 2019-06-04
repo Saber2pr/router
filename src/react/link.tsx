@@ -13,29 +13,29 @@ export interface LinkProps
     React.AnchorHTMLAttributes<HTMLAnchorElement>,
     HTMLAnchorElement
   > {
-  to: string
+  to?: string
   scrollReset?: boolean
 }
 
 export function Link({ to, scrollReset, onClick, ...props }: LinkProps) {
   const RedirectMap = useContext(RedirectCtx)
-  props.href = to
+  const href = to || props.href
 
   const dispatch = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     event.preventDefault()
 
-    try {
-      if (RedirectMap.has(to)) {
-        History.push(RedirectMap.get(to), scrollReset)
-      } else {
-        History.push(to, scrollReset)
+    if (href) {
+      try {
+        RedirectMap.has(href)
+          ? History.push(RedirectMap.get(href), scrollReset)
+          : History.push(href, scrollReset)
+      } catch (error) {
+        History.push('/404')
       }
-    } catch (error) {
-      History.push('/404')
     }
 
     onClick && onClick(event)
   }
 
-  return <a {...{ ...props, href: to }} onClick={dispatch} />
+  return <a {...{ ...props, href }} onClick={dispatch} />
 }

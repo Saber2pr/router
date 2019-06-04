@@ -77,7 +77,10 @@ const App = (
         </li>
 
         <li>
-          <Link to="/login">login</Link>
+          <Link href="/login">login</Link>
+        </li>
+        <li>
+          <Link onClick={() => console.log('to')}>test none `to`</Link>
         </li>
       </ul>
     </nav>
