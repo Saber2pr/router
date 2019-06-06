@@ -68,17 +68,16 @@ const App = (
 ReactDOM.render(App, document.querySelector('#root'))
 ```
 
-## useHistory
+## usePush
 
 ```ts
-import { useHistory } from '@saber2pr/router'
+import { usePush } from '@saber2pr/router'
 
-// get current history strategy
-const History = useHistory()
+const [push, getCurrentHref] = usePush()
 
-History.push
-History.getHref
-// ...
+push('/home')
+
+getCurrentHref() // '/home'
 ```
 
 ---

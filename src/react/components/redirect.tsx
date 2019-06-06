@@ -2,11 +2,10 @@
  * @Author: saber2pr
  * @Date: 2019-06-03 19:12:24
  * @Last Modified by: saber2pr
- * @Last Modified time: 2019-06-03 23:59:13
+ * @Last Modified time: 2019-06-06 14:48:56
  */
 import React, { useEffect, useContext } from 'react'
-
-export const RedirectCtx = React.createContext(new Map<string, string>())
+import { RedirectCtx } from '../context'
 
 export interface RedirectProps {
   from: string

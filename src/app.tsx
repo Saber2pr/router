@@ -7,7 +7,7 @@ import {
   Redirect,
   hashHistory,
   browserHistory,
-  useHistory
+  usePush
 } from '.'
 
 const Test = () => (
