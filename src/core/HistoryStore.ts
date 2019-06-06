@@ -10,7 +10,7 @@ export namespace HistoryStore {
   const map: SubscribeMap = {}
   export let current: string = null
 
-  export function set(url: string, callback: string | Function) {
+  export function set(url: string, callback: Function) {
     url in map || (map[url] = callback)
   }
 

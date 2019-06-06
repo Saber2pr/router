@@ -34,10 +34,6 @@ const Test = () => (
 )
 
 const Blog = () => {
-  useEffect(() => {
-    console.log('blog')
-  })
-
   return (
     <Router>
       <nav>
@@ -73,7 +69,7 @@ const Blog = () => {
 }
 
 const App = (
-  <Router history={browserHistory}>
+  <Router history={hashHistory}>
     <header>head</header>
 
     <nav>

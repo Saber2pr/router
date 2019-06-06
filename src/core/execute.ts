@@ -12,31 +12,18 @@ function getMaxLenChildStr(map: SubscribeMap, query: string = '') {
   return maxLenStrs.find(s => (s === '/' ? query === s : query.startsWith(s)))
 }
 
-export function execute(map: SubscribeMap, start: string) {
-  if (!start) return
+export function execute(map: SubscribeMap, route: string) {
+  if (!route) return
 
-  start = getMaxLenChildStr(map, start)
+  route = getMaxLenChildStr(map, route)
 
-  let current = map[start]
+  const callback = map[route]
 
-  if (typeof current === 'undefined') {
-    throw new Error(`cannot find route:[${start}]`)
+  if (typeof callback === 'undefined') {
+    throw new Error(`cannot find route:[${route}]`)
   }
 
-  let url: string
-  while (typeof current === 'string') {
-    current = getMaxLenChildStr(map, current)
-    const next = map[current]
+  callback()
 
-    if (next) {
-      url = current
-      current = next
-    } else {
-      throw new Error(`cannot find route:[${current}]`)
-    }
-  }
-
-  current()
-
-  return url || start
+  return route
 }

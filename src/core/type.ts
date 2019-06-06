@@ -5,7 +5,7 @@
  * @Last Modified time: 2019-06-04 14:54:43
  */
 export interface SubscribeMap {
-  [url: string]: string | Function
+  [url: string]: Function
 }
 
 export interface Cancel {
@@ -15,6 +15,6 @@ export interface Cancel {
 export interface History {
   push: (url: string, scrollReset?: boolean) => void
   subscribe(routes: SubscribeMap): Cancel
-  subscribe(path: string, callback: string | Function): Cancel
+  subscribe(path: string, callback: Function): Cancel
   getHref: () => string
 }

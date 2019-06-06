@@ -8,11 +8,11 @@ import { SubscribeMap, Cancel } from './type'
 import { HistoryStore } from './HistoryStore'
 
 export function subscribe(routes: SubscribeMap): Cancel
-export function subscribe(path: string, callback: string | Function): Cancel
+export function subscribe(path: string, callback: Function): Cancel
 
 export function subscribe(
   arg1: SubscribeMap | string,
-  arg2?: string | Function
+  arg2?: Function
 ): Cancel {
   if (typeof arg1 === 'string') {
     HistoryStore.set(arg1, arg2)
