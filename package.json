@@ -36,5 +36,8 @@
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^4.0.0",
     "typescript": "^3.2.1"
+  },
+  "dependencies": {
+    "@saber2pr/memo": "0.0.1"
   }
 }
