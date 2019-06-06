@@ -16,6 +16,34 @@ npm install @saber2pr/router
 git clone https://github.com/Saber2pr/@saber2pr/router.git
 ```
 
+## 关于 Keep-Alive
+
+> 原理 display none. 切换路由不会销毁 DOM 实例。
+
+```tsx
+export function KAlive({ children: C, isShow = 'none' }: KAliveProps) {
+  const ref = useRef<HTMLDivElement>()
+
+  useLayoutEffect(() => {
+    ref.current.style.display = isShow
+  }, [isShow])
+
+  return <div ref={ref}>{C}</div>
+}
+```
+
+## 与 Keep-Alive 有关的属性
+
+× cache:boolean
+
+```tsx
+// 添加 cache 标记
+<Router cache>
+  <Route component={() => <div>1</div>} />
+  <Route component={() => <div>2</div>} />
+</Router>
+```
+
 ---
 
 # Feature

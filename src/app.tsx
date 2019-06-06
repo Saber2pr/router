@@ -69,7 +69,7 @@ const Blog = () => {
 }
 
 const App = (
-  <Router history={hashHistory}>
+  <Router cache history={hashHistory}>
     <header>head</header>
 
     <nav>
@@ -101,7 +101,7 @@ const App = (
     <Route path="/blog" component={() => <Blog />} />
     <Route path="/about" component={() => <div>about</div>} />
 
-    <Redirect from="/home" to="/about" />
+    {/* <Redirect from="/home" to="/about" /> */}
 
     <Route component={() => <h1>404 not Found</h1>} />
 
