@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import {
   Route,
@@ -33,38 +33,44 @@ const Test = () => (
   </Router>
 )
 
-const Blog = () => (
-  <Router>
-    <nav>
-      <ul>
-        <li>
-          <Link to="/blog/first">first</Link>
-        </li>
+const Blog = () => {
+  useEffect(() => {
+    console.log('blog')
+  })
 
-        <li>
-          <Link to="/blog/second">second</Link>
-        </li>
-        <li>
-          <Link to="/blog/third">third</Link>
-        </li>
-      </ul>
-    </nav>
+  return (
+    <Router>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/blog/first">first</Link>
+          </li>
 
-    <Route path="/blog/first" component={() => <div>first</div>} />
-    <Route path="/blog/second" component={() => <div>second</div>} />
-    <Route
-      path="/blog/third"
-      component={() => (
-        <div>
-          third
+          <li>
+            <Link to="/blog/second">second</Link>
+          </li>
+          <li>
+            <Link to="/blog/third">third</Link>
+          </li>
+        </ul>
+      </nav>
+
+      <Route path="/blog/first" component={() => <div>first</div>} />
+      <Route path="/blog/second" component={() => <div>second</div>} />
+      <Route
+        path="/blog/third"
+        component={() => (
           <div>
-            <Test />
+            third
+            <div>
+              <Test />
+            </div>
           </div>
-        </div>
-      )}
-    />
-  </Router>
-)
+        )}
+      />
+    </Router>
+  )
+}
 
 const App = (
   <Router history={browserHistory}>

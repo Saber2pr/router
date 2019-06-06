@@ -10,7 +10,6 @@ export interface RouteProps {
   path?: string
   component: React.ComponentType<any>
   default?: boolean
-  cache?: 'root' | 'parent'
 }
 
 export interface RouteElement extends JSX.Element {
