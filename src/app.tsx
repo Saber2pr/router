@@ -11,7 +11,7 @@ import {
 } from '.'
 
 const Test = () => (
-  <Router>
+  <>
     <nav>
       <ul>
         <li>
@@ -26,16 +26,17 @@ const Test = () => (
         </li>
       </ul>
     </nav>
-
-    <Route path="/blog/third/1" component={() => <div>1</div>} />
-    <Route default path="/blog/third/2" component={() => <div>2</div>} />
-    <Route path="/blog/third/3" component={() => <div>3</div>} />
-  </Router>
+    <Router cache basename="/blog/third/">
+      <Route path="1" component={() => <div>1</div>} />
+      <Route default path="2" component={() => <div>2</div>} />
+      <Route path="3" component={() => <div>3</div>} />
+    </Router>
+  </>
 )
 
 const Blog = () => {
   return (
-    <Router>
+    <>
       <nav>
         <ul>
           <li>
@@ -50,26 +51,27 @@ const Blog = () => {
           </li>
         </ul>
       </nav>
-
-      <Route path="/blog/first" component={() => <div>first</div>} />
-      <Route path="/blog/second" component={() => <div>second</div>} />
-      <Route
-        path="/blog/third"
-        component={() => (
-          <div>
-            third
+      <Router cache basename="/blog/">
+        <Route path="first" component={() => <div>first</div>} />
+        <Route path="second" component={() => <div>second</div>} />
+        <Route
+          path="third"
+          component={() => (
             <div>
-              <Test />
+              third
+              <div>
+                <Test />
+              </div>
             </div>
-          </div>
-        )}
-      />
-    </Router>
+          )}
+        />
+      </Router>
+    </>
   )
 }
 
 const App = (
-  <Router cache history={hashHistory}>
+  <>
     <header>head</header>
 
     <nav>
@@ -94,19 +96,19 @@ const App = (
         </li>
       </ul>
     </nav>
+    <Router history={browserHistory}>
+      <Route path="/" component={() => <div>Hello World!</div>} />
 
-    <Route path="/" component={() => <div>Hello World!</div>} />
+      <Route path="/home" component={() => <div>home</div>} />
+      <Route path="/blog" component={() => <Blog />} />
+      <Route path="/about" component={() => <div>about</div>} />
 
-    <Route path="/home" component={() => <div>home</div>} />
-    <Route path="/blog" component={() => <Blog />} />
-    <Route path="/about" component={() => <div>about</div>} />
+      {/* <Redirect from="/home" to="/about" /> */}
 
-    {/* <Redirect from="/home" to="/about" /> */}
-
-    <Route component={() => <h1>404 not Found</h1>} />
-
+      <Route component={() => <h1>404 not Found</h1>} />
+    </Router>
     <footer>footer</footer>
-  </Router>
+  </>
 )
 
 ReactDOM.render(App, document.querySelector('#root'))

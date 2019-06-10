@@ -34,7 +34,7 @@ export function KAlive({ children: C, isShow = 'none' }: KAliveProps) {
 
 ## 与 Keep-Alive 有关的属性
 
-× cache:boolean
+- cache:boolean
 
 ```tsx
 // 添加 cache 标记
@@ -43,6 +43,8 @@ export function KAlive({ children: C, isShow = 'none' }: KAliveProps) {
   <Route component={() => <div>2</div>} />
 </Router>
 ```
+
+- keep-live 会造成初始化 url 异常
 
 ---
 
