@@ -8,7 +8,7 @@ import { SubscribeMap } from './type'
 import memo from '@saber2pr/memo'
 
 // `/repo/react` matched `/repo` instead of `/`
-function getMaxLenChildStr(map: SubscribeMap, query: string = '') {
+export function getMaxLenChildStr(map: SubscribeMap, query: string = '') {
   const maxLenStrs = Object.keys(map).sort((a, b) => b.length - a.length)
   return maxLenStrs.find(s => (s === '/' ? query === s : query.startsWith(s)))
 }

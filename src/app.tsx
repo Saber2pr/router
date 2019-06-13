@@ -74,29 +74,29 @@ const App = (
   <>
     <header>head</header>
 
-    <nav>
-      <ul>
-        <li>
-          <Link to="/home">home</Link>
-        </li>
+    <Router history={hashHistory}>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/home">home</Link>
+          </li>
 
-        <li>
-          <Link to="/blog">blog</Link>
-        </li>
+          <li>
+            <Link to="/blog">blog</Link>
+          </li>
 
-        <li>
-          <Link to="/about">about</Link>
-        </li>
+          <li>
+            <Link to="/about">about</Link>
+          </li>
 
-        <li>
-          <Link href="/login">login</Link>
-        </li>
-        <li>
-          <Link onClick={() => console.log('to')}>test none `to`</Link>
-        </li>
-      </ul>
-    </nav>
-    <Router history={browserHistory}>
+          <li>
+            <Link href="/login">login</Link>
+          </li>
+          <li>
+            <Link onClick={() => console.log('to')}>test none `to`</Link>
+          </li>
+        </ul>
+      </nav>
       <Route path="/" component={() => <div>Hello World!</div>} />
 
       <Route path="/home" component={() => <div>home</div>} />
@@ -105,7 +105,7 @@ const App = (
 
       {/* <Redirect from="/home" to="/about" /> */}
 
-      <Route component={() => <h1>404 not Found</h1>} />
+      {/* <Route component={() => <h1>404 not Found</h1>} /> */}
     </Router>
     <footer>footer</footer>
   </>

@@ -5,14 +5,17 @@
  * @Last Modified time: 2019-06-06 13:51:17
  */
 import { HistoryStore } from './HistoryStore'
-import { execute } from './execute'
+import { execute, getMaxLenChildStr } from './execute'
 
 export function pushHash(url: string, scrollReset?: boolean) {
-  HistoryStore.current = execute(HistoryStore.get(), url)
+  // HistoryStore.current = execute(HistoryStore.get(), url)
 
-  window.location.hash = `#${HistoryStore.current}`
+  if (!getMaxLenChildStr(HistoryStore.get(), url)) throw new Error()
+
+  window.location.hash = `#${url}`
   scrollReset && window.scroll(0, 0)
 }
 
-window.onhashchange = () =>
-  (HistoryStore.current = execute(HistoryStore.get(), location.hash.slice(1)))
+window.onhashchange = () => {
+  HistoryStore.current = execute(HistoryStore.get(), location.hash.slice(1))
+}

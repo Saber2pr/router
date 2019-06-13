@@ -5,17 +5,18 @@
  * @Last Modified time: 2019-06-06 15:05:17
  */
 import { useContext } from 'react'
-import { useHistory } from './useHistory'
-import { RedirectCtx } from '../context'
+import { RedirectCtx, HistoryCtx } from '../context'
 
 export function usePush(): [
   (href: string, scrollReset?: boolean) => void,
   () => string
 ] {
   const RedirectMap = useContext(RedirectCtx)
-  const H = useHistory()
+  const Ctx = useContext(HistoryCtx)
 
   const push = (href: string, scrollReset?: boolean) => {
+    const H = Ctx.history
+
     try {
       const isRedirected = RedirectMap.has(href)
 
@@ -27,5 +28,5 @@ export function usePush(): [
     }
   }
 
-  return [push, H.getHref]
+  return [push, Ctx.history.getHref]
 }
