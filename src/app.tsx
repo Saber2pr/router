@@ -74,7 +74,7 @@ const App = (
   <>
     <header>head</header>
 
-    <Router history={hashHistory}>
+    <Router history={browserHistory}>
       <nav>
         <ul>
           <li>

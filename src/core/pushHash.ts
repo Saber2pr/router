@@ -6,11 +6,12 @@
  */
 import { HistoryStore } from './HistoryStore'
 import { execute, getMaxLenChildStr } from './execute'
+import VM from '@saber2pr/schedular'
 
 export function pushHash(url: string, scrollReset?: boolean) {
-  // HistoryStore.current = execute(HistoryStore.get(), url)
-
   if (!getMaxLenChildStr(HistoryStore.get(), url)) throw new Error()
+
+  HistoryStore.current = url
 
   window.location.hash = `#${url}`
   scrollReset && window.scroll(0, 0)
@@ -18,4 +19,11 @@ export function pushHash(url: string, scrollReset?: boolean) {
 
 window.onhashchange = () => {
   HistoryStore.current = execute(HistoryStore.get(), location.hash.slice(1))
+}
+
+window.onload = () => {
+  new VM().push({
+    expirationTime: 40,
+    idleCallback: () => execute(HistoryStore.get(), HistoryStore.current)
+  })
 }

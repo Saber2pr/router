@@ -1,6 +1,6 @@
 {
   "name": "@saber2pr/router",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "> react-router-dom by hooks api.",
   "repository": {
     "type": "git",
@@ -38,6 +38,7 @@
     "typescript": "^3.2.1"
   },
   "dependencies": {
-    "@saber2pr/memo": "0.0.1"
+    "@saber2pr/memo": "0.0.1",
+    "@saber2pr/schedular": "0.0.8"
   }
 }
