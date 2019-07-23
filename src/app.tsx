@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import ReactDOM from 'react-dom'
+import React, { useEffect } from "react";
+import ReactDOM from "react-dom";
 import {
   Route,
   Router,
@@ -8,7 +8,7 @@ import {
   hashHistory,
   browserHistory,
   usePush
-} from '.'
+} from ".";
 
 const Test = () => (
   <>
@@ -32,7 +32,7 @@ const Test = () => (
       <Route path="3" component={() => <div>3</div>} />
     </Router>
   </>
-)
+);
 
 const Blog = () => {
   return (
@@ -67,14 +67,14 @@ const Blog = () => {
         />
       </Router>
     </>
-  )
-}
+  );
+};
 
 const App = (
   <>
     <header>head</header>
 
-    <Router history={browserHistory}>
+    <Router history={hashHistory}>
       <nav>
         <ul>
           <li>
@@ -86,14 +86,14 @@ const App = (
           </li>
 
           <li>
-            <Link to="/about">about</Link>
+            <Link to="/中文">中文</Link>
           </li>
 
           <li>
             <Link href="/login">login</Link>
           </li>
           <li>
-            <Link onClick={() => console.log('to')}>test none `to`</Link>
+            <Link onClick={() => console.log("to")}>test none `to`</Link>
           </li>
         </ul>
       </nav>
@@ -101,7 +101,7 @@ const App = (
 
       <Route path="/home" component={() => <div>home</div>} />
       <Route path="/blog" component={() => <Blog />} />
-      <Route path="/about" component={() => <div>about</div>} />
+      <Route path="/中文" component={() => <div>中文</div>} />
 
       {/* <Redirect from="/home" to="/about" /> */}
 
@@ -109,6 +109,6 @@ const App = (
     </Router>
     <footer>footer</footer>
   </>
-)
+);
 
-ReactDOM.render(App, document.querySelector('#root'))
+ReactDOM.render(App, document.querySelector("#root"));
